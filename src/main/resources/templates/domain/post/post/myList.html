@@ -10,7 +10,7 @@
     <h1>내글 목록</h1>
 
     <ul>
-        <li th:each="post : ${postPage.content}">
+        <li th:each="post : ${postPage?.content}">
             <a th:href="|/post/${post.id}|">
                 <span th:text="${post.id}"></span>
                 /

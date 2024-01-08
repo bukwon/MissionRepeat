@@ -11,7 +11,7 @@
     </style>
 
     <div class="pagination"
-         th:if="${itemPage.totalPages > 0}"
+         th:if="${itemPage?.totalPages > 0}"
          style="display:flex; gap:10px;"
          th:with="page = ${itemPage.number + 1}"
     >
