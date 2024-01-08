@@ -38,10 +38,10 @@ public class PostService {
     }
 
     public Page<Post> search(String kw, Pageable pageable) {
-        return postRepository.findByIsPublishedAndTitleContainingIgnoreCaseOrIsPublishedAndBodyContainingIgnoreCase(true, kw, true, kw, pageable);
+        return postRepository.search(true, kw, pageable);
     }
 
     public Page<Post> search(Member author, String kw, Pageable pageable) {
-        return postRepository.findByAuthorAndTitleContainingIgnoreCaseOrAuthorAndBodyContainingIgnoreCase(author, kw, author, kw, pageable);
+        return postRepository.search(author, kw, pageable);
     }
 }

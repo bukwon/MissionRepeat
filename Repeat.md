@@ -7,9 +7,14 @@
 - 글 작성완료 되었다면 redirect 로 처리
 - @PreAuthorize() 어노테이션으로 권한 제한
 - 그에 맞게 write.html 생성하고 폼 맞추기
+- PostController 에서 사용한 writeForm에 isPublished를 이용해 공개 여부 true, false 사용
 - 이번 판 에러.... 자꾸 
 
 2024-01-08T14:38:17.635+09:00 ERROR 26612 --- [omcat-handler-9] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.thymeleaf.exceptions.TemplateInputException: An error happened during template parsing (template: "class path resource [templates/domain/post/post/myList.html]")] with root cause ...
 
 란 에러가 떠서 html 내에 타임리프 부분이 잘못된 줄 알았지만, 컨트롤러 write 메서드 보면
 return을 myList로 하고 있었음. myList가 아니라 write이다. 연계성 없는 메서드가 다른 html로 return 하면 해당 html에선 null 값이 들어올 수 밖에 없다.
+
+## 3. QueryDSL 도입, 글 목록, 내글 목록
+
+- querydsl 이용해 비공개 글은 전체 글 목록에서 숨겨질 수 있다.

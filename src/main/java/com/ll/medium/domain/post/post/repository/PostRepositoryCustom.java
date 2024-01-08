@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface PostRepository extends JpaRepository<Post, Long>, PostRepositoryCustom {
-    List<Post> findTop30ByIsPublishedOrderByIdDesc(boolean isPublished);
+public interface PostRepositoryCustom {
+    Page<Post> search(boolean isPublished, String kw, Pageable pageable);
+    Page<Post> search(Member author, String kw, Pageable pageable);
 }
