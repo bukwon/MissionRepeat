@@ -12,15 +12,13 @@
 
 
 <div layout:fragment="content">
-
     <h1><span th:text="${username}"></span> 글 목록</h1>
-
 
     <ul>
 
         <li th:each="post : ${postPage.content}">
 
-            <a th:href="|/post/${post.id}|">
+            <a th:href="|/b/${post.author.username}/${post.id}|">
 
                 <span th:text="${post.id}"></span>
 

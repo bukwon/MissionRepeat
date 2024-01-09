@@ -37,8 +37,6 @@ public class PostController {
 
     @GetMapping("/list")
     public String showList(
-            Model model,
-            @PathVariable String username,
             @RequestParam(defaultValue = "") String kw,
             @RequestParam(defaultValue = "1") int page
     ) {
