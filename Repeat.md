@@ -86,3 +86,16 @@ $(function () {
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <!--이후내용-->
 ```
+
+## 6. GET /b/user1 구현 (step 9)
+
+- 이번 편은 공개, 비공개 여부에 따라 내글에선 모두 보여야 하지만, 전체 글에선 제한을 둬야함.
+- search 메서드에 boolean 매개변수 하나 추가해 줌으로써 전체 글에서 내가 내 글 보는 것 조차 보이지 않을 수 있음
+- 이번 편 에러
+![img_1.png](img_1.png)
+500 코드는 주로 컨트롤러에서 발생한 오류로 오타 혹은 null값을 지닌 매개변수를 선언해 생기는 오류
+이유는
+![img_2.png](img_2.png)
+
+BlogController에 써야할 매개변수인데 PostController에 똑같이 매개변수를 줘서 null 값이 들어간거였음. 결국에 컨트롤러 착각으로 중복으로 적었던거임
+

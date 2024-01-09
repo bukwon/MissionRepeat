@@ -41,8 +41,8 @@ public class PostService {
         return postRepository.search(true, kw, pageable);
     }
 
-    public Page<Post> search(Member author, String kw, Pageable pageable) {
-        return postRepository.search(author, kw, pageable);
+    public Page<Post> search(Member author, Boolean isPublished, String kw, Pageable pageable) {
+        return postRepository.search(author, isPublished, kw, pageable);
     }
 
     public boolean canModify(Member actor, Post post) {

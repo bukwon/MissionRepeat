@@ -26,13 +26,6 @@ public class PostRepositoryImpl implements PostRepositoryCustom {
         BooleanExpression condition = post
                 .isPublished.eq(isPublished);
 
-        if (kw != null && !kw.isBlank()) {
-            condition = condition.and(
-                    post.title.containsIgnoreCase(kw)
-                            .or(post.body.containsIgnoreCase(kw))
-            );
-        }
-
         JPAQuery<Post> postsQuery = jpaQueryFactory
                 .select(post)
                 .from(post)
@@ -57,10 +50,16 @@ public class PostRepositoryImpl implements PostRepositoryCustom {
     }
 
     @Override
-    public Page<Post> search(Member author, String kw, Pageable pageable) {
+    public Page<Post> search(Member author, Boolean isPublished, String kw, Pageable pageable) {
         // 조건 생성
         BooleanExpression condition = post
                 .author.eq(author);
+
+        if (isPublished != null) {
+            condition = condition.and(
+                    post.isPublished.eq(isPublished)
+            );
+        }
 
         if (kw != null && !kw.isBlank()) {
             condition = condition.and(

@@ -37,6 +37,8 @@ public class PostController {
 
     @GetMapping("/list")
     public String showList(
+            Model model,
+            @PathVariable String username,
             @RequestParam(defaultValue = "") String kw,
             @RequestParam(defaultValue = "1") int page
     ) {
@@ -61,7 +63,7 @@ public class PostController {
         sorts.add(Sort.Order.desc("id"));
         Pageable pageable = PageRequest.of(page - 1, 10, Sort.by(sorts));
 
-        Page<Post> postPage = postService.search(rq.getMember(), kw, pageable);
+        Page<Post> postPage = postService.search(rq.getMember(), null, kw, pageable);
         rq.setAttribute("postPage", postPage);
         rq.setAttribute("page", page);
 
