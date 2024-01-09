@@ -124,4 +124,10 @@ BlogController에 써야할 매개변수인데 PostController에 똑같이 매�
 - IdEntity --> 아이디를 가지는 앤티티 (@MappedSuperclass, @Getter 이용)
 - @Transient 는 ? JPA와 관련없는 매서드란 것을 알려주는 애노테이션
 - 점프 투 스프링부트에선 ManyToMany를 썼지만 실무에선 간단히 이용한 것 이외엔 잘 사용하지 않음. OneToMany로 대신 이용
-- 
+
+## 10. PostLike 앤티티 도입
+
+- cascade
+- hasLike() 메서드 의미는 추천을 했는가 안 했는가를 확인
+- 회원이 글을 추천하는데 이렇게 보면 N:N 관계, 글 입장에서 보면 글은 하나지만 여려 회원명이 추천을 누를 수 있다. 보통 이것을 해결하는게
+중간 테이블 (postLike)
