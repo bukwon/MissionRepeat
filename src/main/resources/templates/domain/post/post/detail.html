@@ -10,6 +10,11 @@
     <h1>글 내용</h1>
 
     <div>
+        <h3>공개여부</h3>
+        <div th:text="${post.published ? '공개' : '비공개'}"></div>
+    </div>
+
+    <div>
         <h3>제목</h3>
         <div th:text="${post.title}"></div>
     </div>
@@ -23,6 +28,8 @@
 
     <div>
         <button onclick="history.back();">뒤로가기</button>
+        <a th:if="${@postService.canModify(@rq.member, post)}" th:href="|/post/${post.id}/modify|">글 수정</a>
+        <a >글 삭제</a>
     </div>
 </div>
 

@@ -1,4 +1,4 @@
-# Medium Mission Repeat
+# Medium Mission Repeat (https://www.scode.gg/p/13284)
 
 ## 1. myList 구현
 
@@ -18,3 +18,13 @@ return을 myList로 하고 있었음. myList가 아니라 write이다. 연계성
 ## 3. QueryDSL 도입, 글 목록, 내글 목록
 
 - querydsl 이용해 비공개 글은 전체 글 목록에서 숨겨질 수 있다.
+
+## 4. 수정 구현
+
+- Controller에 modify 메서드 생성
+  - 예외처리 클래스를 따로 만들어 놓는 것이 나중에 편리함
+  - 수정 처리할 땐 PutMapping으로 설정
+- PostService에서 Modify 메서드 @Transactional로 처리
+  - 매서드 내에서 발생하는 모든 DB 조작은 전부 성공하거나 전부 실패
+  - 트랜잭션으로 묶이면 데이터의 일관성을 유지하고 에러가 발생할 경우 롤백하여 이전 상태로 돌아가게 함
+- 나머지 처리는 html에서 타임리프 이용

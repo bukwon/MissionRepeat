@@ -44,4 +44,15 @@ public class PostService {
     public Page<Post> search(Member author, String kw, Pageable pageable) {
         return postRepository.search(author, kw, pageable);
     }
+
+    public boolean canModify(Member actor, Post post) {
+        return actor.equals(post.getAuthor());
+    }
+
+    @Transactional
+    public void modify(Post post, String title, String body, boolean published) {   // 수정 작업
+        post.setTitle(title);
+        post.setBody(body);
+        post.setPublished(published);
+    }
 }
