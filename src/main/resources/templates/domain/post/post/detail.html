@@ -10,6 +10,11 @@
     <h1>글 내용</h1>
 
     <div>
+        <h3>조회수</h3>
+        <div th:text="${#numbers.formatInteger(post.hit, 3, 'COMMA')}"></div>
+    </div>
+
+    <div>
         <h3>공개여부</h3>
         <div th:text="${post.published ? '공개' : '비공개'}"></div>
     </div>

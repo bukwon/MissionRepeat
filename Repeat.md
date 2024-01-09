@@ -111,3 +111,9 @@ BlogController에 써야할 매개변수인데 PostController에 똑같이 매�
 ## 7. GET /b/user1/1 구현
 
 - 이번 목적은 내글 목록 카테고리 클릭했을 때 url 맨 뒤에 자신의 id가 나오도록 구현
+
+## 8. 조회수 증가
+
+- @Setter(AccessLevel.PRIVATE) --> 클래스 내부에서만 setter 메서드 사용할 수 있도록 제한
+- 본 내용에선 @Setter(PROTECTED) 로 변경
+-  th:text="${#numbers.formatInteger(post.hit, 3, 'COMMA')}" 이용해 조회수 세미 콤마 생성
