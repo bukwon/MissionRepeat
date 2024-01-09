@@ -139,3 +139,6 @@ BlogController에 써야할 매개변수인데 PostController에 똑같이 매�
 
 ## 12. 댓글
 
+- 댓글 입력은 아무 설정해주지 않으면 250글자가 최대이니 주의. @Column 어노테이션으로 설정바람
+- th:id="|postComment-${postComment.id}|" 입력으로 자신이 댓글 입력할 때 마다 해당 댓글로 스크롤
+- 

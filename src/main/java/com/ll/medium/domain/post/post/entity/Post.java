@@ -4,10 +4,7 @@ import com.ll.medium.domain.member.member.entity.Member;
 import com.ll.medium.domain.post.postComment.entity.PostComment;
 import com.ll.medium.domain.post.postLike.entity.PostLike;
 import com.ll.medium.global.jpa.BaseEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -29,11 +26,13 @@ public class Post extends BaseEntity {
 
     @OneToMany(mappedBy = "post", cascade = ALL, orphanRemoval = true)
     @Builder.Default
+    @OrderBy("id DESC")
     private List<PostComment> comments = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Member author;
     private String title;
+    @Column(columnDefinition = "TEXT")
     private String body;
     private boolean isPublished;
     @Setter(PROTECTED)
