@@ -131,3 +131,11 @@ BlogController에 써야할 매개변수인데 PostController에 똑같이 매�
 - hasLike() 메서드 의미는 추천을 했는가 안 했는가를 확인
 - 회원이 글을 추천하는데 이렇게 보면 N:N 관계, 글 입장에서 보면 글은 하나지만 여려 회원명이 추천을 누를 수 있다. 보통 이것을 해결하는게
 중간 테이블 (postLike)
+
+## 11. 추천 취소
+
+- canLike 메서드에선 hasLike가 !hasLike 이어야하고 deleteLike는 그 반대
+- 추천하는 앤티티 따로 만듦으로써 중복 확인 가능 (PostLike)
+
+## 12. 댓글
+

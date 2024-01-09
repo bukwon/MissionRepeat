@@ -2,6 +2,7 @@ package com.ll.medium.domain.post.post.service;
 
 import com.ll.medium.domain.member.member.entity.Member;
 import com.ll.medium.domain.post.post.entity.Post;
+import com.ll.medium.domain.post.postComment.entity.PostComment;
 import com.ll.medium.domain.post.post.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -45,11 +46,26 @@ public class PostService {
         return postRepository.search(author, isPublished, kw, pageable);
     }
 
+    public boolean canLike(Member actor, Post post) {
+        if (actor == null) return false;
+
+        return !post.hasLike(actor);
+    }
+
+    public boolean canCancelLike(Member actor, Post post) {
+        if (actor == null) return false;
+
+        return post.hasLike(actor);
+    }
+
     public boolean canModify(Member actor, Post post) {
+
+        if (actor == null) return false;
         return actor.equals(post.getAuthor());
     }
 
     public boolean canDelete(Member actor, Post post) {
+        if (actor == null) return false;
         if ( actor.isAdmin() ) return true;
 
         return actor.equals(post.getAuthor());
@@ -70,5 +86,20 @@ public class PostService {
     @Transactional
     public void increaseHit(Post post) {
         post.increaseHit();
+    }
+
+    @Transactional
+    public void like(Member actor, Post post) {
+        post.addLike(actor);
+    }
+
+    @Transactional
+    public void cancelLike(Member actor, Post post) {
+        post.deleteLike(actor);
+    }
+
+    @Transactional
+    public PostComment writeComment(Member actor, Post post, String body) {
+        return post.writeComment(actor,body);
     }
 }
