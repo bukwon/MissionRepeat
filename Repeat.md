@@ -142,3 +142,4 @@ BlogController에 써야할 매개변수인데 PostController에 똑같이 매�
 - 댓글 입력은 아무 설정해주지 않으면 250글자가 최대이니 주의. @Column 어노테이션으로 설정바람
 - th:id="|postComment-${postComment.id}|" 입력으로 자신이 댓글 입력할 때 마다 해당 댓글로 스크롤
 - 댓글 삭제 및 수정 메서드에서 @rq.member 은 사용자 권한을 확인하기 위한 용도
+- 댓글 삭제 또한 권한 설정 및 리다이렉트 설정 잘 해주면 끝
