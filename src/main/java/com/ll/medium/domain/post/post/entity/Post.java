@@ -1,6 +1,7 @@
 package com.ll.medium.domain.post.post.entity;
 
 import com.ll.medium.domain.member.member.entity.Member;
+import com.ll.medium.global.jpa.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -18,15 +19,7 @@ import static lombok.AccessLevel.PROTECTED;
 @Builder
 @Getter
 @Setter
-@EntityListeners(AuditingEntityListener.class)
-public class Post {
-    @Id
-    @GeneratedValue(strategy = IDENTITY)
-    private Long id;
-    @CreatedDate
-    private LocalDateTime createDate;
-    @LastModifiedDate
-    private LocalDateTime modifyDate;
+public class Post extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private Member author;
     private String title;

@@ -1,9 +1,7 @@
 package com.ll.medium.domain.member.member.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.ll.medium.global.jpa.BaseEntity;
+import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -26,17 +24,11 @@ import static lombok.AccessLevel.PROTECTED;
 @Getter
 @Setter
 @EntityListeners(AuditingEntityListener.class)
-public class Member {
-    @Id
-    @GeneratedValue(strategy = IDENTITY)
-    private Long id;
-    @CreatedDate
-    private LocalDateTime createDate;
-    @LastModifiedDate
-    private LocalDateTime modifyDate;
+public class Member extends BaseEntity {
     private String username;
     private String password;
 
+    @Transient
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
 

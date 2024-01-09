@@ -117,3 +117,11 @@ BlogController에 써야할 매개변수인데 PostController에 똑같이 매�
 - @Setter(AccessLevel.PRIVATE) --> 클래스 내부에서만 setter 메서드 사용할 수 있도록 제한
 - 본 내용에선 @Setter(PROTECTED) 로 변경
 -  th:text="${#numbers.formatInteger(post.hit, 3, 'COMMA')}" 이용해 조회수 세미 콤마 생성
+
+## 9. BaseEntity 도입
+
+- BaseEntity --> 정보를 가지는 앤티티
+- IdEntity --> 아이디를 가지는 앤티티 (@MappedSuperclass, @Getter 이용)
+- @Transient 는 ? JPA와 관련없는 매서드란 것을 알려주는 애노테이션
+- 점프 투 스프링부트에선 ManyToMany를 썼지만 실무에선 간단히 이용한 것 이외엔 잘 사용하지 않음. OneToMany로 대신 이용
+- 
