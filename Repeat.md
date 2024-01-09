@@ -28,3 +28,61 @@ return을 myList로 하고 있었음. myList가 아니라 write이다. 연계성
   - 매서드 내에서 발생하는 모든 DB 조작은 전부 성공하거나 전부 실패
   - 트랜잭션으로 묶이면 데이터의 일관성을 유지하고 에러가 발생할 경우 롤백하여 이전 상태로 돌아가게 함
 - 나머지 처리는 html에서 타임리프 이용
+
+## 5. 삭제 구현
+
+- 글 삭제는 html에서 form으로 처리
+- 컨트롤러, 서비스, html로 삭제 기능 구현했지만 다음과 같은 에러가 발생
+![img.png](img.png)
+
+삭제 처리가 제대로 안된 모습인데, 아마 csrf 토큰 관련한 문제라 강사님께서 그러셨다. global.js와 layout.html에 각각 다음과 같은 코드 쓰면 처리 가능
+
+```javascript global.js
+$(function () {
+    $('select[value]').each(function (index, el) {
+        const value = $(el).attr('value');
+        if (value) $(el).val(value);
+    });
+
+    $('a[method="DELETE"], a[method="POST"], a[method="PUT"]').click(function (e) {
+        if ($(this).attr('onclick-after')) {
+            let onclickAfter = null;
+
+            eval("onclickAfter = function() { " + $(this).attr('onclick-after') + "}");
+
+            if (!onclickAfter()) return false;
+        }
+
+        const action = $(this).attr('href');
+        const csfTokenValue = $("meta[name='_csrf']").attr("content");
+
+        const formHtml = `
+        <form action="${action}" method="POST">
+            <input type="hidden" name="_csrf" value="${csfTokenValue}">
+            <input type="hidden" name="_method" value="${$(this).attr('method')}">
+        </form>
+        `;
+
+        const $form = $(formHtml);
+        $('body').append($form);
+        $form.submit();
+
+        return false;
+    });
+
+    $('a[method="POST"][onclick], a[method="DELETE"][onclick], a[method="PUT"][onclick]').each(function (index, el) {
+        const onclick = $(el).attr('onclick');
+
+        $(el).removeAttr('onclick');
+
+        $(el).attr('onclick-after', onclick);
+    });
+});
+```
+
+```html layout.html
+    <!--이전내용-->
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <!--이후내용-->
+```
