@@ -1,9 +1,11 @@
 package com.ll.medium.domain.member.member.entity;
 
 import com.ll.medium.global.jpa.BaseEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Transient;
+
+import jakarta.persistence.*;
+
 import lombok.*;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
@@ -19,6 +21,8 @@ import static lombok.AccessLevel.PROTECTED;
 @Builder
 @Getter
 @Setter
+@EntityListeners(AuditingEntityListener.class)
+
 public class Member extends BaseEntity {
     private String username;
     private String password;

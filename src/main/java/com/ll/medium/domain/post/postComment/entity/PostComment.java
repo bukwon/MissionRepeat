@@ -1,6 +1,5 @@
 package com.ll.medium.domain.post.postComment.entity;
 
-
 import com.ll.medium.domain.member.member.entity.Member;
 import com.ll.medium.domain.post.post.entity.Post;
 import com.ll.medium.global.jpa.BaseEntity;

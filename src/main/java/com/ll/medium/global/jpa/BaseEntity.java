@@ -13,8 +13,8 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 @Getter
 @EntityListeners(AuditingEntityListener.class)
-@ToString(callSuper = true)
-public class BaseEntity extends IdEntity {
+@ToString
+public class BaseEntity extends IdEntity{
     @CreatedDate
     private LocalDateTime createDate;
     @LastModifiedDate

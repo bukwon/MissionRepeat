@@ -39,15 +39,15 @@
 
         <div>
             <label>제목</label>
-            <input type="text" name="title" th:value="${post.title}">
+            <input type="text" name="title" th:value="${post.title}"> <!--이렇게 th:value 처리하면 전 값이 그대로 남아있을 수 있음-->
         </div>
 
         <div>
             <label>내용</label>
-            <textarea name="body" th:text="${post.body}"></textarea>
+            <textarea type="body" name="body" th:text="${post.body}"></textarea>
         </div>
 
-        <button type="submit">글수정</button>
+        <button type="submit">글 수정</button>
     </form>
 </div>
 </body>

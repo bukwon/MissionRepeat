@@ -1,9 +1,10 @@
 package com.ll.medium.domain.post.post.service;
 
 import com.ll.medium.domain.member.member.entity.Member;
+import com.ll.medium.domain.post.post.controller.PostCommentController;
 import com.ll.medium.domain.post.post.entity.Post;
-import com.ll.medium.domain.post.post.repository.PostRepository;
 import com.ll.medium.domain.post.postComment.entity.PostComment;
+import com.ll.medium.domain.post.post.repository.PostRepository;
 import com.ll.medium.domain.post.postComment.repository.PostCommentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -61,21 +62,20 @@ public class PostService {
     }
 
     public boolean canModify(Member actor, Post post) {
-        if (actor == null) return false;
 
+        if (actor == null) return false;
         return actor.equals(post.getAuthor());
     }
 
     public boolean canDelete(Member actor, Post post) {
         if (actor == null) return false;
-
-        if (actor.isAdmin()) return true;
+        if ( actor.isAdmin() ) return true;
 
         return actor.equals(post.getAuthor());
     }
 
     @Transactional
-    public void modify(Post post, String title, String body, boolean published) {
+    public void modify(Post post, String title, String body, boolean published) {   // 수정 작업
         post.setTitle(title);
         post.setBody(body);
         post.setPublished(published);
@@ -103,7 +103,7 @@ public class PostService {
 
     @Transactional
     public PostComment writeComment(Member actor, Post post, String body) {
-        return post.writeComment(actor, body);
+        return post.writeComment(actor,body);
     }
 
     public boolean canModifyComment(Member actor, PostComment comment) {

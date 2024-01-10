@@ -55,11 +55,13 @@ public class Post extends BaseEntity {
 
     public boolean hasLike(Member member) {
         return likes.stream()
-                .anyMatch(postLike -> postLike.getMember().equals(member));
+                .anyMatch(postLike ->
+                        postLike.getMember().equals(member));
     }
 
     public void deleteLike(Member member) {
-        likes.removeIf(postLike -> postLike.getMember().equals(member));
+        likes.removeIf(postLike ->
+                postLike.getMember().equals(member));
     }
 
     public PostComment writeComment(Member actor, String body) {

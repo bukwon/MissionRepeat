@@ -49,7 +49,6 @@
            th:href="|/post/${post.id}/cancelLike|" method="DELETE">
             추천취소
         </a>
-
         <form style="display: contents"
               th:if="${@postService.canDelete(@rq.member, post)}"
               th:action="|/post/${post.id}/delete|"

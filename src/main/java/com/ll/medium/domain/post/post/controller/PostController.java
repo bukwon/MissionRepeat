@@ -72,12 +72,6 @@ public class PostController {
         return "domain/post/post/myList";
     }
 
-    @PreAuthorize("isAuthenticated()")
-    @GetMapping("/write")
-    public String showWrite() {
-        return "domain/post/post/write";
-    }
-
     @Getter
     @Setter
     public static class WriteForm {
@@ -88,12 +82,19 @@ public class PostController {
         private boolean isPublished;
     }
 
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("isAuthenticated()")  // 권한 부여 받은 사람만 적을 수 있음
     @PostMapping("/write")
     public String write(@Valid WriteForm form) {
         Post post = postService.write(rq.getMember(), form.getTitle(), form.getBody(), form.isPublished());
 
         return rq.redirect("/post/" + post.getId(), post.getId() + "번 글이 작성되었습니다.");
+    }
+
+    @PreAuthorize("isAuthenticated()")  // write 메서도와 마찬가지
+    @GetMapping("/write")
+    public String showWrite() {
+
+        return "domain/post/post/write";
     }
 
     @PreAuthorize("isAuthenticated()")
@@ -142,6 +143,7 @@ public class PostController {
         return rq.redirect("/post/list", post.getId() + "번 글이 삭제되었습니다.");
     }
 
+    // 추천 기능
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/{id}/like")
     public String like(@PathVariable long id) {

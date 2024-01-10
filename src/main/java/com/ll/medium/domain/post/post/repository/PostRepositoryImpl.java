@@ -26,13 +26,6 @@ public class PostRepositoryImpl implements PostRepositoryCustom {
         BooleanExpression condition = post
                 .isPublished.eq(isPublished);
 
-        if (kw != null && !kw.isBlank()) {
-            condition = condition.and(
-                    post.title.containsIgnoreCase(kw)
-                            .or(post.body.containsIgnoreCase(kw))
-            );
-        }
-
         JPAQuery<Post> postsQuery = jpaQueryFactory
                 .select(post)
                 .from(post)
