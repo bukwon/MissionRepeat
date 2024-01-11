@@ -1,2 +1,3 @@
 <div class="bg-red-500 w-[100px] h-[100px]"></div>
-123
+<button class="btn btn-primary">버튼</button>
+<i class="fa fa-user"></i>
